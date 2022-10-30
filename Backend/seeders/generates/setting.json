@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "app_name": "Course Online",
+    "contact_address": "123",
+    "contact_tel": "0899999999",
+    "contact_email": "admin@courseonline.test",
+    "created_at": "2022-10-13 00:00:00",
+    "updated_at": "2022-10-13 00:00:00"
+  }
+]
