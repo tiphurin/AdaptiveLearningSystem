@@ -1,0 +1,233 @@
+<p-toast></p-toast>
+<div class="container-fluid content-info">
+  <a routerLink="/admin/user">
+    <h1><i class="pi pi-arrow-left" style="font-size: 1.5rem;font-weight: bold"></i>Add User</h1>
+  </a>
+  <div class="info">
+    <form [formGroup]="addUser">
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">Role</label>
+          <div class="row pl-2 pr-3">
+            <div class="col-12 col-md-4 pr-0" *ngIf="currentUser.role == 'admin'">
+              <div class="p-field-radiobutton p-radiobutton-custom">
+                <p-radioButton
+                name="role"
+                value="teacher"
+                formControlName="role"
+                inputId="role1"
+                [ngClass]="{'ng-invalid ng-dirty':submitted && f.role.errors}"></p-radioButton>
+                <label for="role1" class="px-2 pt-1">Teacher</label>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 pr-0">
+              <div class="p-field-radiobutton">
+                <p-radioButton
+                name="role"
+                value="parent"
+                formControlName="role"
+                inputId="role2"
+                [ngClass]="{'ng-invalid ng-dirty':submitted && f.role.errors}"></p-radioButton>
+                <label for="role2" class="px-2 pt-1">Parent</label>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 pr-0">
+              <div class="p-field-radiobutton">
+                <p-radioButton
+                name="role"
+                value="student"
+                formControlName="role"
+                inputId="role3"
+                [ngClass]="{'ng-invalid ng-dirty':submitted && f.role.errors}"></p-radioButton>
+                <label for="role3" class="px-2 pt-1">Student</label>
+              </div>
+            </div>
+          </div>
+          <!-- !err -->
+          <app-error-message
+            [control]="f.role"
+            nameField="Role"
+            [submitted]="submitted"></app-error-message>
+        </div>
+      </div>
+      <div class="form-row mb-4" *ngIf="f.role.value == 'student'">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">Parent</label>
+          <p-dropdown 
+            placeholder="select parent"
+            [style]="{'width': '100%'}" 
+            inputId="dropdown" 
+            [autoDisplayFirst]="false" 
+            [options]="parents" 
+            formControlName="parent" 
+            optionLabel="firstname"
+            optionValue="id"
+          ></p-dropdown>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">First Name</label>
+          <input pInputText
+            type="text"
+            class="form-control"
+            placeholder="First Name"
+            formControlName="firstname"
+            [ngClass]="{'ng-invalid ng-dirty':submitted && f.firstname.errors
+            }">
+          <!-- !err -->
+          <app-error-message
+            [control]="f.firstname"
+            nameField="First Name"
+            [submitted]="submitted"></app-error-message>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">Last Name</label>
+          <input
+            pInputText
+            type="text"
+            class="form-control"
+            formControlName="lastname"
+            placeholder="Last Name"
+            [ngClass]="{'ng-invalid ng-dirty':submitted && f.lastname.errors }">
+          <!-- !err -->
+          <app-error-message
+            [control]="f.lastname"
+            nameField="Last Name"
+            [submitted]="submitted"></app-error-message>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">Phone</label>
+          <p-inputMask 
+              type="text" 
+              mask="999-9999-999"
+              placeholder="xxx-xxxx-xxx"
+              [unmask]="true"
+              formControlName="tel"
+              styleClass="form-control" 
+              [ngClass]="{'ng-invalid ng-dirty':submitted && f.tel.errors }"
+            ></p-inputMask>
+          <!-- !err -->
+          <app-error-message
+            [control]="f.tel"
+            nameField="Phone"
+            [submitted]="submitted"></app-error-message>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">Email</label>
+          <input
+            pInputText
+            type="text"
+            class="form-control"
+            formControlName="email"
+            placeholder="Email"
+            [ngClass]="{'ng-invalid ng-dirty':submitted && f.email.errors }">
+          <!-- !err -->
+          <div>
+            <span *ngIf="submitted && f.email.errors?.email; else noError" class="invalid-text">
+              Email format not valid.
+            </span>
+            <ng-template #noError>
+              <span style="visibility: hidden;">
+                  onError
+              </span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-6 col-md-6">
+          <label for="">Username</label>
+          <input pInputText
+            type="text"
+            class="form-control"
+            placeholder="Username"
+            formControlName="username"
+            [ngClass]="{'ng-invalid ng-dirty':submitted && f.username.errors }">
+          <!-- !err -->
+          <app-error-message
+            [control]="f.username"
+            nameField="Username"
+            [submitted]="submitted"></app-error-message>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="">Password</label>
+          <p class="mb-0">
+            <p-password formControlName="password" placeholder="Password" minlength="6" [style]="{'width': '100%'}"
+                  inputStyleClass="form-control" [ngClass]="{'ng-invalid ng-dirty':submitted && f.password.errors }" 
+                  ></p-password>
+          </p>
+          <!-- !err -->
+          <app-error-message
+            [control]="f.password"
+            nameField="Password"
+            [submitted]="submitted"></app-error-message>
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="">Confirm Password</label>
+          <p class="mb-0">
+            <p-password formControlName="cpassword" placeholder="Confirm Password" autocomplete="off"[style]="{'width': '100%'}"
+            inputStyleClass="form-control" [ngClass]="{'ng-invalid ng-dirty':submitted && f.cpassword.errors }" 
+            ></p-password>
+          </p>
+          <!-- !err -->
+          <div>
+            <span *ngIf="submitted && f.cpassword.errors; else noError">
+                <span *ngIf="f.cpassword.errors.mustMatch; else noErrorMustMatch" class="invalid-text">
+                  "Confirm Password" and "Password" not match.
+                </span>
+            </span>
+            <ng-template #noError>
+                <span style="visibility: hidden;">
+                    onError
+                </span>
+            </ng-template>
+          </div>
+          <!-- !err -->
+          <ng-template #noErrorMustMatch>
+            <app-error-message
+                [control]="f.cpassword" 
+                nameField="Confirm Password" 
+                [submitted]="submitted"
+            ></app-error-message>
+          </ng-template>
+          <!-- nameFieldConfirm="รหัสผ่าน" -->
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-sm-12 col-lg-12">
+          <label for="">Addess</label>
+          <textarea pInputTextarea class="form-control" rows="3"
+              formControlName="address" placeholder="Address"
+              [ngClass]="{'ng-invalid ng-dirty':submitted && f.address.errors }"></textarea>
+          <!-- !err -->
+          <app-error-message
+            [control]="f.address"
+            nameField="Address"
+            [submitted]="submitted"></app-error-message>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex row mt-5">
+      <div class="col-sm-3 col-lg-2 pr-0 mt-5">
+      </div>
+      <div class="ml-auto col-sm-3 col-lg-2 pr-1 mt-5">
+        <button pButton type="button" class="p-button-secondary btn-block"
+        label="Cancel" (click)="onCancel()"></button>
+      </div>
+      <div class="col-md-3 col-lg-2 pl-1 mt-5">
+        <button pButton type="button" class="p-button-success btn-block"
+        [ngClass]="{'disabled':loading}" label="Add User" [loading]="loading" (click)="onSubmit()"></button>
+      </div>
+    </div>
+  </div>
+</div>

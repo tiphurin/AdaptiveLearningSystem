@@ -1,0 +1,24 @@
+// ?calendar
+::ng-deep .p-calendar {
+    width: 100%;
+    // height: 38.39px;
+    .p-inputtext {
+        // background-color: #F3F6F9;
+        // border-color: #F3F6F9;
+    }
+    .p-datepicker table td > span.p-highlight {
+        // background: #3699FF;
+        // color: #ffffff;
+    }
+    .p-datepicker .p-datepicker-header .p-datepicker-title {
+        .p-datepicker-month {
+            border-radius: 4px;
+        }
+        .p-datepicker-year {
+            border-radius: 4px;
+        }
+    }
+}
+// ::ng-deep input::placeholder  {
+//     color: #ababab;
+// }

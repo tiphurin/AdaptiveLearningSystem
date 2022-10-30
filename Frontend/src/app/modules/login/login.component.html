@@ -1,0 +1,57 @@
+<p-toast></p-toast>
+<p-toast key="alertLogin" [baseZIndex]="20001"></p-toast>
+<div class="container">
+  <form [formGroup]="loginForm" class="login__form">
+    <div class="text-input mt-3">
+      <label for="nin-input" class="text-xl">USERNAME</label>
+      <input
+        id="nin-input" 
+        class="text-xl"
+        type="text" 
+        pInputText
+        formControlName="username"
+        [ngClass]="{'ng-invalid ng-dirty':submitted && f.username.errors }"
+      >
+      <!-- !err -->
+      <app-error-message 
+        [control]="f.username" 
+        nameField="username" 
+        [submitted]="submitted"
+      ></app-error-message>
+    </div>
+    
+    
+    <div class="text-input mb-2">
+      <label for="password-input" class="text-xl">PASSWORD</label>
+      <input 
+        id="password-input" 
+        class="text-xl"
+        type="password" 
+        pInputText 
+        formControlName="password" 
+        [ngClass]="{'input-password-invaid':submitted && f.password.errors}"
+      >
+
+      <!-- !err -->
+      <div class="flex justify-content-between">
+        <app-error-message 
+          [control]="f.password" 
+          nameField="Password" 
+          [submitted]="submitted"
+        ></app-error-message>
+        <!-- <span><a class="u-left-text-small" href="#">ลืมรหัสผ่าน ?</a></span> -->
+      </div>
+    </div>
+
+    <div class="text-input">
+      <div class="flex justify-content-start">
+        <a href="#" class="text-gray-500">forgot password?</a>
+      </div>
+    </div>
+
+    <a type="button" class="btn btn-primary btn-lg px-7 py-2" (click)="onLogin()"
+        [ngClass]="{'disabled':submitted}"> <i class="pi pi-spin pi-spinner" *ngIf="submitted"></i> Login</a>
+
+  </form>
+</div>
+

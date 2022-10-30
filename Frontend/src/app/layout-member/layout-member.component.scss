@@ -1,0 +1,258 @@
+// ?navbar
+@import "src/assets/scss/components/button";
+
+.navbar {
+  padding: 10px 10px;
+  background: #fff;
+  border: none;
+  border-radius: 0;
+  // margin-bottom: 40px;
+  margin-bottom: 10px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-btn {
+  box-shadow: none;
+  outline: none !important;
+  border: none;
+}
+
+.nav__icon-sidebar {
+  cursor: pointer;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+// ?sidebar active
+:host ::ng-deep #navber-panel .p-panelmenu  {
+  & .p-menuitem-link-active {
+
+    .p-menuitem-text {
+      color: var(--color-primary);
+    }
+
+    .p-panelmenu-icon {
+      color: var(--color-primary);
+    }
+    
+    .p-menuitem-text {
+      color: var(--color-primary);
+      // font-size: 18px;
+    }
+    .p-menuitem-icon {
+      color: var(--color-primary);
+    }
+
+  }
+
+  & .p-submenu-list .p-menuitem-link-active {
+    .p-menuitem-text {
+      color: var(--color-primary);
+    }
+
+    .p-panelmenu-icon {
+      color: var(--color-primary);
+    }
+    
+    .p-menuitem-text {
+      color: var(--color-primary);
+      // font-size: 18px;
+    }
+    .p-menuitem-icon {
+      color: var(--color-primary);
+    }
+  }
+}
+
+
+// ?sidebar
+// push id in the first of selecter
+:host ::ng-deep #navber-panel .p-panelmenu  {
+  // 
+  padding: 20px 0;
+
+  & .p-panelmenu-content {
+    .p-menuitem {
+      .p-menuitem-link {
+        margin-bottom: 24px;
+        &:hover {
+          .p-menuitem-text {
+            color: var(--color-primary);
+          }
+          .p-menuitem-icon {
+            color: var(--color-primary);
+          }
+        }
+      }
+    }
+  }   
+
+  .p-panelmenu-header-link {
+    transition: all 0.1s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 5%;
+      background-color: var(--color-primary);
+      transform: scaleY(0);
+      transition: transform 0.2s, width 0.4s cubic-bezier(1, 0, 0, 1) 0.2s,
+        background-color 0.1s;
+    }
+
+    & .p-panelmenu-icon {
+      margin-left: auto; // *
+      order: 1;
+    }
+
+    .p-menuitem-text {
+      font-size: 14px;
+      font-weight: 400;
+
+      @media screen and (max-width: 890px) {
+        font-size: 12px;
+      }
+    }
+
+    // เมื่อ hover menu
+    &:hover {
+      background-color: rgb(241, 236, 255) !important;
+      border: var(--color-white);
+
+      .p-menuitem-text {
+        @media screen and (max-width: 890px) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  .p-panelmenu-header a:focus {
+    box-shadow: 0 0 0 0.2rem transparent;
+  }
+
+  .p-panelmenu-header .p-panelmenu-header-link {
+    background-color: var(--color-white);
+    border-color: transparent;
+    margin-bottom: 22px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+  }
+
+  .p-panelmenu-header .p-menuitem-link-active {
+    background-color: rgb(241, 236, 255) !important;
+    font-weight: 700;
+  }
+
+  .p-panelmenu-panel {
+    background-color: var(--color-white);
+    // background-color: var(--color-primary);
+  }
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+}
+
+#sidebar {
+  min-width: 240px;
+  max-width: 240px;
+  background: #ffffff;
+  color: #333333;
+  transition: all 0.3s;
+
+  //box-shadow: var(--shadow-dark);
+  min-height: 100vh;
+  z-index: 9999;
+
+  @media screen and (max-width: 768px) { // ipad
+    min-width: 170px;
+    max-width: 170px;
+  }
+}
+
+.active {
+  margin-left: -238px;
+}
+
+// ?sidebar header
+#sidebar .sidebar-header {
+  padding: 5px;
+  background: #ffffff;
+}
+
+.sidebar-header img {
+  width: 117px;
+  height: auto;
+}
+
+
+// ?content
+
+#content {
+  width: 100%;
+  min-height: 100vh;
+  transition: all 0.3s;
+}
+
+.content-info {
+  padding: 24px;
+}
+
+.image_outer_container {
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+}
+.image_inner_container img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+.image_outer_container .green_icon {
+  background-color: #4cd137;
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  height: 10px;
+  width: 10px;
+  border: 1px solid white;
+  border-radius: 50%;
+}
+
+.nav-link div {
+  font-size: inherit;
+  color: #333333;
+}
+
+
+
+@media (max-width: 890px) {
+  #sidebar {
+    margin-left: -173px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #sidebarCollapse span {
+    display: none;
+  }
+}
+@media (min-width: 1339.98px) {
+  .fa-align-left {
+    display: none;
+  }
+}
+
+:host ::ng-deep .p-component {
+  font-family: "Prompt", sans-serif;
+}

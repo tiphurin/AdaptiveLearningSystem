@@ -1,0 +1,58 @@
+:host ::ng-deep .p-datatable {
+  // .p-datatable-gridlines {
+    .p-datatable-header {
+      background: #ffffff;
+      border: none !important;
+      display: flex;
+      padding: 10px 0px 42px 0px;
+      justify-content: space-between;
+    }
+  // }
+  
+  .p-datatable-thead > tr {
+    height: 30px;
+  }
+
+  .p-datatable-thead > tr > th {
+    // height: 30px;
+    background-color: #ffffff;
+    border: none;
+    padding: .5rem .5rem;
+  }
+
+  .p-datatable-tbody > tr > td {
+    border: none;
+    border-top: 1px solid #333333;
+    border-bottom: 1px solid #e9ecef;
+    font-weight: 300;
+  }
+
+  .p-datatable-tbody > tr > td > i {
+    color: var(--color-yellow);
+    cursor: pointer;
+  }
+
+  .p-paginator-bottom {
+    border: none;
+  }
+
+  .p-paginator {
+    margin-top: 32px;
+
+    .p-paginator-first, .p-paginator-prev, .p-paginator-next, .p-paginator-last {
+      color: var(--color-primary);
+    }
+
+    .p-paginator-pages .p-paginator-page {
+      background-color: inherit;
+      border-radius: 100%;
+      color: var(--color-primary);
+    }
+  
+    .p-paginator-pages .p-paginator-page.p-highlight {
+      background-color: var(--color-primary);
+      border-radius: 100%;
+      color: #ffffff;
+    }
+  }
+}

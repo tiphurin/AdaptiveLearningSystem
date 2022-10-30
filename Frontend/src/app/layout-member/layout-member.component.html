@@ -1,0 +1,74 @@
+<div class="wrapper">
+  
+  <!-- ?begin::sidebar -->
+  <div 
+    id="sidebar" 
+    [ngClass]="{'active': !showSidebar}"
+    class="no-print"
+  >
+
+    <!-- ?begin::Logo -->
+    <div class="sidebar-header text-center">
+      <img class="img-fluid" src="../../assets/img/Logo.png" alt="" srcset="">
+    </div>
+    <!-- *end::Logo -->
+
+    <!-- ?begin::menu -->
+    <p-panelMenu id="navber-panel" class="menu" [multiple]="false" [model]="items"></p-panelMenu>
+    <!--  -->
+    <!-- *end::menu -->
+
+  </div>
+  <!-- *end::sidebar -->
+
+  <div id="content">
+
+    <!-- ?begin::navber -->
+    <nav class="navbar navbar-expand-lg bg-white no-print">
+      <div class="container-fluid">
+        <button pButton pRipple 
+          type="button" 
+          icon="pi pi-bars" 
+          class="p-button-rounded p-button-text p-button-secondary nav__icon-sidebar" 
+          (click)="toggleSidebar()"
+        >
+        </button>
+        <div id="navbarSupportedContent">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item">
+              <div class="d-flex align-items-center h-100">
+                <a class="nav-link">
+                  <div class="">{{user?.firstname}} {{user?.lastname}}</div> 
+                  <div class="font-bold text-right">{{user?.role}}</div> 
+                </a>
+                <div class="image_outer_container">
+                  <div class="image_inner_container">
+                    <div ngbDropdown class="d-inline-block" display="dynamic" placement="bottom-right">
+                      <p-avatar 
+                        shape="circle" 
+                        image="../../assets/img/users/blank.png"
+                        ngbDropdownToggle
+                      ></p-avatar>
+                      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem (click)="showProfileModal()">Profile</button>
+                        <button ngbDropdownItem (click)="logout()">Sign Out</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- *end::navber -->
+
+    <!-- ?begin:: content -->
+    <router-outlet></router-outlet>
+    <!-- *end:: content -->
+  </div>
+
+</div>
+
+<p-toast key="alertApp" [baseZIndex]="10001"></p-toast>

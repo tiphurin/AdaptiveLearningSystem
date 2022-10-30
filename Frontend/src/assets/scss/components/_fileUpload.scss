@@ -1,0 +1,48 @@
+// ?fileupload
+:host ::ng-deep.p-fileupload .p-fileupload-content {
+  background: none;
+  padding: none;
+  border: none;
+  border-bottom-right-radius: none;
+  border-bottom-left-radius: none;
+}
+
+:host ::ng-deep.p-fileupload .p-fileupload-buttonbar {
+  background: none;
+  padding: none;
+  border: none;
+  color: none;
+  border-bottom:none;
+  border-top-right-radius: none;
+  border-top-left-radius: none;
+}
+:host ::ng-deep.p-fileupload-content .p-progressbar {
+  display: none;
+}
+:host ::ng-deep.p-fileupload-row {
+  // align-items: center;
+  display: none;
+}
+:host ::ng-deep.p-fileupload .p-fileupload-buttonbar {
+  padding: 0rem;
+}
+:host ::ng-deep.p-fileupload .p-fileupload-content {
+  display: none;
+}
+
+:host ::ng-deep .p-fileupload .p-fileupload-buttonbar .p-button {
+  border: 1px solid #e3a831;
+  color: #e3a831;
+  font-size: 16;
+  display: inline-block;
+  padding: 12px auto;
+  cursor: pointer;
+  background-color: inherit;
+
+  &:hover,
+  &:active {
+    background-color: #e3a831;
+    color: #fff !important;
+    border: 1px solid #e3a831;
+  }
+}
