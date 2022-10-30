@@ -1,6 +1,6 @@
-# ContentCourseOnline
+# Adaptive Learning System
 
-ContentCourseOnline on Node.js
+Adaptive Learning System on Node.js
 
 ## Setup Environment
 
