@@ -1,0 +1,111 @@
+<div class="container-fluid content-info">
+  <h1><i class="pi pi-cog text-5xl"></i>  System Evaluation Management</h1>
+  <div class="info">
+    <!-- ?begin::table -->
+    <p-table
+      #table
+      dataKey="id"
+      [rows]="rows"
+      [(first)]="first"
+      [loading]="loadingTable"
+      [value]="lists"
+      styleClass="p-datatable-gridlines"
+      [globalFilterFields]="['name']"
+      [paginator]="true"
+      [rowHover]="true"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [filterDelay]="0"
+      [rowsPerPageOptions]="[10,25,50]"
+    >
+      <ng-template pTemplate="colgroup">
+        <colgroup>
+            <col style="width: 10%;">
+            <col style="width: 35%;">
+            <col style="width: 35%;">
+            <col style="width: 20%;">
+        </colgroup>
+      </ng-template>
+    <!-- [showPageLinks]="false"
+      [showFirstLastIcon]="false" -->
+      <ng-template pTemplate="caption">
+        <span class="table-header">
+          <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input pInputText 
+              type="text" 
+              (input)="table.filterGlobal($event.target.value, 'contains')" 
+              placeholder="Search Name" 
+            />
+          </span>
+        </span>
+        <span>
+          <button 
+            pRipple
+            pButton
+            type="button" 
+            class="btn btn-primary" 
+            routerLink="/admin/system/add"
+            icon="pi pi-plus-circle" 
+            label="Add Evoluation" 
+          >
+          </button>
+        </span>
+      </ng-template>
+
+    <!-- begin::table-head -->
+    <ng-template pTemplate="header" let-columns >
+        <tr>
+          <th class="text-center">#</th>
+          <th class="text-center" pSortableColumn="name">Name<p-sortIcon field="name"></p-sortIcon></th>
+          <th class="text-center">Description</th>
+          <th class="text-center">Action</th>
+        </tr>
+    </ng-template>
+    <!-- end::table-head -->
+
+    <!-- begin::table-body -->
+    <ng-template pTemplate="body" let-data let-i="rowIndex" expanded="false">
+        <!-- begin::row -->
+        <tr class="datatable-row">
+            <td class="text-center font-bold">{{ i + 1 }}</td>
+            <td class="text-center font-bold">{{ data.name }}</td>
+            <td class="text-center">{{ data.description || '-'}}</td>
+            <td class="text-center" >
+              <span class="px-2 cursor-pointer" routerLink="/admin/system/edit/{{data.id}}">
+                <i class="pi pi-user-edit text-warning font-bold text-2xl"></i>
+              </span>
+              <span class="px-2 cursor-pointer" (click)="showConfirm(data.id)"
+              >
+                <i class="pi pi-trash text-danger font-bold text-2xl" ></i>
+              </span>
+            </td>
+            <!-- end::แก้ไข -->
+        </tr>
+        <!-- end::row -->
+    </ng-template>
+    <!-- end::table-body -->
+
+    </p-table>
+    <!-- *end::table -->
+  </div>
+</div>
+
+<p-toast position="center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+            <h4>{{message.summary}}</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-6">
+                <button type="button" pButton (click)="onDeleteSystemEvaluation()" label="Yes" class="p-button-success"></button>
+            </div>
+            <div class="col-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+            </div>
+        </div>
+      </div>
+  </ng-template>
+</p-toast>

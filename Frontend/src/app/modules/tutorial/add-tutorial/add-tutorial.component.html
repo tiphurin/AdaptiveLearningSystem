@@ -1,0 +1,82 @@
+<p-toast></p-toast>
+<div class="container-fluid content-info">
+  <a routerLink="/admin/system">
+    <h1>
+      <i class="pi pi-arrow-left" style="font-size: 1.5rem;font-weight: bold"></i> 
+      <span> Add Tutorial</span>
+    </h1>
+  </a>
+  <div class="info">
+    <!-- ?begin::section -->
+    <div [formGroup]="form">
+      <div class="row pt-2">
+        <div class="col-md-12">
+          <input
+              pInputText
+              type="text"
+              class="form-control text-2xl"
+              formControlName="name"
+              placeholder="Title"
+              [ngClass]="{'ng-invalid ng-dirty':submitted && form.get('name').errors }">
+          <div>
+            <span *ngIf="submitted && form.get('name').errors; else noError" class="invalid-text">
+              Please input Title.
+            </span>
+            <ng-template #noError>
+              <span style="visibility: hidden;">
+                  onError
+              </span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="row pt-2">
+        <div class="col-md-12">
+          <p-editor formControlName="description" [style]="{'height':'320px'}">
+            <ng-template pTemplate="header">
+              <span class="ql-formats">
+                  <button type="button" class="ql-bold" aria-label="Bold"></button>
+                  <button type="button" class="ql-italic" aria-label="Italic"></button>
+                  <button type="button" class="ql-underline" aria-label="Underline"></button>
+              </span>
+          </ng-template>
+          </p-editor>
+        </div>
+      </div>
+
+    </div>
+    
+    <hr>
+    <div class="row pt-3">
+      <div class="offset-md-9 col-md-3 offset-sm-6 col-sm-6 col-12 text-right">
+
+        <button pButton type="button" class="p-button-success btn-block"
+        [ngClass]="{'disabled':loading}" label="Save Form" [loading]="loading" (click)="save()"></button>
+
+      </div>
+    </div>
+
+    <!-- *end::section -->
+  </div>
+</div>
+
+<p-toast position="center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+            <h4>{{message.summary}}</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-6">
+                <button type="button" pButton (click)="deleteQuestion()" label="Yes" class="p-button-success"></button>
+            </div>
+            <div class="col-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+            </div>
+        </div>
+      </div>
+  </ng-template>
+</p-toast>

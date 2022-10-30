@@ -1,0 +1,182 @@
+<p-toast></p-toast>
+<!-- <div class="loading-indicator" *ngIf="loading">
+  <p-progressSpinner strokeWidth="5"></p-progressSpinner>
+</div> -->
+<div class="container-fluid content-info">
+  <a routerLink="/admin/system">
+    <h1>
+      <i class="pi pi-arrow-left" style="font-size: 1.5rem;font-weight: bold"></i> 
+      <span> Edit Evaluation</span>
+    </h1>
+  </a>
+  <p-message *ngIf="is_log"  severity="warn" text="กรณีที่แบบประเมินถูกนำไปใช้แล้ว จะไม่สามารถแก้ไขข้อมูลได้" styleClass="p-mr-2 w-100"></p-message>  
+  <div class="info">
+    <!-- ?begin::section -->
+    <div [formGroup]="form">
+      <div class="row pt-2">
+        <div class="col-md-12">
+          <input
+              pInputText
+              type="text"
+              class="form-control text-2xl"
+              formControlName="name"
+              placeholder="Title"
+              [ngClass]="{'ng-invalid ng-dirty':submitted && form.get('name').errors }">
+          <div>
+            <span *ngIf="submitted && form.get('name').errors; else noError" class="invalid-text">
+              Please input Title.
+            </span>
+            <ng-template #noError>
+              <span style="visibility: hidden;">
+                  onError
+              </span>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div class="row pt-2">
+        <div class="col-md-12">
+          <textarea pInputTextarea class="form-control" rows="3"
+              formControlName="description" placeholder="Description"></textarea>
+        </div>
+      </div>
+  
+      <div class="row mt-5" *ngIf="!is_log">
+        <div class="col-md-2 col-sm-6 col-12">
+          <a type="button" class="btn btn-primary" (click)="addQuestion()">
+            <i class="pi pi-plus-circle" ></i> Add Question
+          </a>
+        </div>
+      </div>
+
+      <ng-container formArrayName="questions" *ngFor="let item of form.get('questions')['controls'];let i = index">
+        <div class="box-questions" [formGroupName]="i">
+          <label for="">Question {{ i + 1 }}</label>
+          <div class="row">
+            <div class="col-md-10">
+              <input
+              pInputText
+              type="text"
+              class="form-control"
+              formControlName="question"
+              placeholder=""
+              [ngClass]="{'ng-invalid ng-dirty':submitted && item.controls.question.errors }">
+              <!-- !err -->
+              <div>
+                <span *ngIf="submitted && item.controls.question.errors; else noError" class="invalid-text">
+                  Please input Question.
+                </span>
+                <ng-template #noError>
+                  <span style="visibility: hidden;">
+                      onError
+                  </span>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+          <div class="row pb-3" *ngIf="!is_log">
+            <div class="col-md-10">
+              <a type="button" class="btn btn-info" (click)="addChoice(i)">
+                <i class="pi pi-plus-circle" ></i> Add Choice
+              </a>
+            </div>
+          </div>
+
+          <div formArrayName="choices" *ngFor="let choice of item.get('choices')['controls'];let j = index">
+            <ng-container [formGroupName]="j">
+              <div class="row pl-2">
+                <div class="col-md-5 col-sm-6  col-6">
+                  <input
+                  pInputText
+                  type="text"
+                  class="form-control"
+                  formControlName="choice"
+                  placeholder="Choice {{ j+1 }}"
+                  [ngClass]="{'ng-invalid ng-dirty':submitted && choice.controls.choice.errors }">
+                  
+                  <div>
+                    <span *ngIf="submitted && choice.controls.choice.errors; else noError" class="invalid-text">
+                      Please input choice.
+                    </span>
+                    <ng-template #noError>
+                      <span style="visibility: hidden;">
+                          onError
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+                <div class="col-md-1 col-sm-1 col-1 text-right">
+                  <label class="pt-1">score</label>
+                </div>
+                <div class="col-md-2 col-sm-2 col-2">
+                  <input
+                  pInputText
+                  type="text"
+                  class="form-control"
+                  formControlName="score"
+                  placeholder=""
+                  [ngClass]="{'ng-invalid ng-dirty':submitted && choice.controls.score.errors }">
+                  
+                  <div>
+                    <span *ngIf="submitted && choice.controls.score.errors; else noError" class="invalid-text">
+                      Please input score.
+                    </span>
+                    <ng-template #noError>
+                      <span style="visibility: hidden;">
+                          onError
+                      </span>
+                    </ng-template>
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-sm-2 col-2">
+                  <i *ngIf="!is_log" class="pi pi-trash text-danger font-bold text-2xl" (click)="deleteChoice(i, j)" title="ลบคำตอบ"></i>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+    
+          <div class="row" *ngIf="!is_log">
+            <div class="offset-md-8 col-md-4 text-right">
+              <button class="btn btn-success mx-2" (click)="copyQuestion(item)" title="คัดลอกคำถาม">
+                <i class="pi pi-copy"></i> Copy</button>
+              <button class="btn btn-danger mx-2" (click)="showConfirm(i)" title="ลบคำถาม">
+                <i class="pi pi-trash"></i> Delete</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    
+    <hr>
+    <div class="row pt-3" *ngIf="!is_log">
+      <div class="offset-md-9 col-md-3 offset-sm-6 col-sm-6 col-12 text-right">
+        <button pButton type="button" class="p-button-warning btn-block"
+        [ngClass]="{'disabled':loading}" label="Edit Form" [loading]="loading" (click)="edit()"></button>
+      </div>
+    </div>
+
+    <!-- *end::section -->
+  </div>
+</div>
+
+<p-toast position="center" key="c" (onClose)="onReject()" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+      <div class="p-flex p-flex-column" style="flex: 1">
+        <div class="text-center">
+            <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+            <h4>{{message.summary}}</h4>
+            <p>{{message.detail}}</p>
+        </div>
+        <div class="grid p-fluid">
+            <div class="col-6">
+                <button type="button" pButton (click)="deleteQuestion()" label="Yes" class="p-button-success"></button>
+            </div>
+            <div class="col-6">
+                <button type="button" pButton (click)="onReject()" label="No" class="p-button-secondary"></button>
+            </div>
+        </div>
+      </div>
+  </ng-template>
+</p-toast>
